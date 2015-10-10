@@ -2,11 +2,11 @@ Python Programming, Databases, and Version Control Assignment
 Richard McAleavey
 Student ID: 15204643
 
-Goal: From the co-ordinates and production data given, identify the combination of site and port that will result in the lowest annual transportation cost. 
+Goal: From the co-ordinates and production data given, identify the combination of site and port that produces the lowest annual transportation cost. 
 
-The overall transportation cost will be calculated in terms of a distance-payload, that is, the product of the mass to be transported (payload) and the distance transported.
+Method: Overall transportation cost will be calculated in terms of a payload-distance, that is, the product of the mass to be transported (payload) and the distance transported.
 
-The approach to solving the problem has two stages. The first consists of taking each potential processing site in turn, and calculating the distance-payload involved in transporting the total payload from all other sites to this site. The second stage is to take each potential processing site in turn again, this time using the overall distance-payload arrived at in the first stage, to calculate the overall distance-payload involved in transporting the overall payload, which must include the payload produced at the potential processing site, to each of the ports. 
+The first stage is to take each potential processing site in turn, calculating the payload-distance for transporting the total payload from all other sites to this site. The second stage is to take each potential processing site in turn again, this time using the overall payload-distance arrived at in the first stage, to calculate the overall payload-distance for transporting the overall payload. The latter must include the payload produced at the potential processing site, to each of the ports. 
 
 In programming terms, the approach entails:
 
@@ -14,17 +14,18 @@ Stage One
 1. Use the sqlite module to extract the data from the tables of the database provided.
 2. Use Pandas to write each of the tables to a corresponding dataframe.
 3. Extract the production data from the dataframes to identical lists, and consolidate, using a 'for' loop, to a single list that maps each potential processing site against all other production sites.
-4. Writing the consolidated list to a dataframe and adding columns calculating the distance between the potential processing site in question and all other production sites.
+4. Write the consolidated list to a dataframe and add columns calculating the distance between the potential processing site and all other production sites.
 
 Stage Two
-5. Use the pandasql module to create a dataframe with a single row containing each potential processing site, its co-ordinates, production capacity, and distance-payload from other sites.
+5. Use the pandasql module to create a dataframe with a single row containing each potential processing site, its co-ordinates, production capacity, and payload-distance from other sites.
 6. Similar to step 3, extract the ports data and the dataframe from step 5 to lists, and using a 'for' loop, create a single mapping each of the potential processing sites against each of the ports.
-7. Write the consolidated list to a dataframe and add columns calculating: (a) the distance-payload for each potential processing site transporting its production to each port; (b) the total distance-payload for transporting all production to each port.
-8. Use the pandasql module to create a dataframe showing every potential combination of processing site and port, containing each potential processing site, its co-ordinates and the overall distance-payload that would be involved in transporting all production to that site for processing, and on to the respective port. Order the data descending in terms of the overall distance-payload. 
-9. Return the first row of the dataframe, ordered to contain the option with the lowest overall distance-payload, and showing the longitude and latitude of both the processing site and port whose combination would result in this distance-payload.
+7. Write the consolidated list to a dataframe and add columns calculating: (a) the payload-distance for each potential processing site transporting its production to each port; (b) the total payload-distance for transporting all production to each port.
+8. Use the pandasql module to create a dataframe showing every potential combination of processing site and port, containing each potential processing site, its co-ordinates and the overall payload-distance that would be involved in transporting all production to that site for processing, and on to the respective port. Order the data descending in terms of the overall payload-distance. 
+9. Return the first row of the dataframe, ordered to contain the option with the lowest overall payload-distance, and showing the longitude and latitude of both the processing site and port whose combination would result in this payload-distance. Print the selected result.
 
 Assumptions
-It is assumed that the straight-line distance between sites, based on co-ordinates given, is a good enough measure of the real transportation distance.  
+1. The straight-line distance between sites, based on co-ordinates given, is a good enough measure of the real transportation distance. It is also assumed that 
+2. The overall production mass to be transported remains the same after processing.
 
 Solution:
 The optimum combination of processing site and port is the plant located at (52.36, 7.71) and the port located at (52.27, 6.39).
