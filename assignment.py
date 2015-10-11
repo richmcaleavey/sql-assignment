@@ -34,6 +34,7 @@ ports_df.insert(loc=0, column='Port_ID', value=(range(1, len(ports_df) + 1)))
 a = map(list, location_df.values)
 b = map(list, location_df.values)
 
+#combine in single list
 mapping_list = []
 for x, y in [(x,y) for x in a for y in b]:
     # remove values where source and destination identifiers are identical
@@ -59,7 +60,7 @@ mapping_df['distance'] = np.sqrt((mapping_df['Raw_Site_Latitude']-mapping_df['Pl
 # add column calculating payload-distance of transportation between source and destination
 mapping_df['delivery_payload'] = mapping_df['distance']*mapping_df['Raw_Site_Payload_Distance']
 
-#The objective is to find the site with the smallest overall payload. 
+#group sites in terms of their overall payload-distance 
 sum_query = """SELECT ID, 
                 Plant_Latitude, 
                 Plant_Longitude, 
